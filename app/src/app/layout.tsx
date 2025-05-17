@@ -2,7 +2,10 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { WalletProvider } from '@/components/WalletProvider'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata = {
   title: 'Solana Money Market',
@@ -15,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={inter.className}>
+      <body>
         <WalletProvider>
           {children}
         </WalletProvider>

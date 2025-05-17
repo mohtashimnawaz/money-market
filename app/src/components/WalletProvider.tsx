@@ -7,7 +7,14 @@ import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl } from '@solana/web3.js';
 
-require('@solana/wallet-adapter-react-ui/styles.css');
+// Import styles in a way that works with Next.js
+import dynamic from 'next/dynamic';
+
+// Dynamically import the wallet adapter styles
+const WalletStyles = dynamic(
+  () => import('@solana/wallet-adapter-react-ui/styles.css'),
+  { ssr: false }
+);
 
 interface Props {
   children: ReactNode;

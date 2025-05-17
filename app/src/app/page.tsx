@@ -1,8 +1,15 @@
 'use client';
 
 import { useWallet } from '@solana/wallet-adapter-react';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import { LendingForms } from '@/components/LendingForms';
+
+// Dynamically import the WalletMultiButton with no SSR
+const WalletButton = dynamic(
+  async () => (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
+  { ssr: false }
+);
 
 export default function Home() {
   const { connected } = useWallet();
@@ -19,7 +26,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex items-center">
-              <WalletMultiButton />
+              <WalletButton />
             </div>
           </div>
         </div>
@@ -57,18 +64,18 @@ export default function Home() {
               {activeTab === 'supply' ? (
                 <div>
                   <h2 className="text-lg font-medium text-gray-900">Supply Assets</h2>
-                  <p className="mt-1 text-sm text-gray-500">
+                  <p className="mt-1 text-sm text-gray-500 mb-6">
                     Deposit assets to earn interest and use as collateral.
                   </p>
-                  {/* Supply form will go here */}
+                  <LendingForms activeTab={activeTab} />
                 </div>
               ) : (
                 <div>
                   <h2 className="text-lg font-medium text-gray-900">Borrow Assets</h2>
-                  <p className="mt-1 text-sm text-gray-500">
+                  <p className="mt-1 text-sm text-gray-500 mb-6">
                     Borrow assets against your supplied collateral.
                   </p>
-                  {/* Borrow form will go here */}
+                  <LendingForms activeTab={activeTab} />
                 </div>
               )}
             </div>

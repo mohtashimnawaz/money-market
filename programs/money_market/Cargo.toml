@@ -1,0 +1,27 @@
+[package]
+name = "money_market"
+version = "0.1.0"
+description = "A decentralized lending protocol built on Solana"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "money_market"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+
+[dependencies]
+anchor-lang = "0.28.0"
+anchor-spl = "0.28.0"
+solana-program = "1.16.0"
+spl-token = { version = "8.0.0", features = ["no-entrypoint"] }
+arrayref = "0.3.6"
+
+
+
